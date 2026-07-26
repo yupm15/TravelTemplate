@@ -1,0 +1,247 @@
+[
+  {
+    "date": "2026-07-31",
+    "day": "Day 1",
+    "title": "抵達大阪・心齋橋・道頓堀",
+    "hotel": "view_hotel",
+    "items": [
+      {
+        "time": "12:10",
+        "place": "kix",
+        "category": "transport",
+        "label": "抵達關西機場"
+      },
+      {
+        "time": "13:30",
+        "place": "view_hotel",
+        "category": "hotel",
+        "label": "前往飯店、寄放行李或入住"
+      },
+      {
+        "time": "15:30",
+        "place": "shinsaibashi",
+        "category": "shopping",
+        "label": "心齋橋散步與購物"
+      },
+      {
+        "time": "17:00",
+        "place": "dotonbori",
+        "category": "spot",
+        "label": "道頓堀散步"
+      },
+      {
+        "time": "18:30",
+        "place": "hon_sekiguchi",
+        "category": "food",
+        "label": "關西風壽喜燒晚餐"
+      },
+      {
+        "time": "20:30",
+        "place": "view_hotel",
+        "category": "hotel",
+        "label": "返回飯店"
+      }
+    ],
+    "notes": [
+      "抵達日預留通關與交通緩衝。",
+      "本せきぐち為正式晚餐，建議提前訂位。"
+    ]
+  },
+  {
+    "date": "2026-08-01",
+    "day": "Day 2",
+    "title": "奈良一日遊・難波晚餐",
+    "hotel": "view_hotel",
+    "items": [
+      {
+        "time": "10:00",
+        "place": "view_hotel",
+        "category": "hotel",
+        "label": "飯店出發"
+      },
+      {
+        "time": "11:10",
+        "place": "nara_station",
+        "category": "transport",
+        "label": "抵達近鐵奈良"
+      },
+      {
+        "time": "11:30",
+        "place": "nara_park",
+        "category": "spot",
+        "label": "奈良公園散策"
+      },
+      {
+        "time": "13:00",
+        "place": "nara_lunch",
+        "category": "food",
+        "label": "奈良午餐（待決定）"
+      },
+      {
+        "time": "15:30",
+        "place": "nara_station",
+        "category": "transport",
+        "label": "返回大阪"
+      },
+      {
+        "time": "16:45",
+        "place": "yasaka",
+        "category": "spot",
+        "label": "難波八阪神社"
+      },
+      {
+        "time": "18:30",
+        "place": "kanigen",
+        "category": "food",
+        "label": "長腳蟹料理晚餐"
+      },
+      {
+        "time": "20:30",
+        "place": "view_hotel",
+        "category": "hotel",
+        "label": "返回飯店"
+      }
+    ],
+    "notes": [
+      "奈良午餐尚未確定，保留彈性。",
+      "八阪神社參拜時間需依當日開放狀況再確認。"
+    ]
+  },
+  {
+    "date": "2026-08-02",
+    "day": "Day 3",
+    "title": "日本環球影城 USJ",
+    "hotel": "oriental",
+    "items": [
+      {
+        "time": "06:45",
+        "place": "view_hotel",
+        "category": "hotel",
+        "label": "提早退房並出發"
+      },
+      {
+        "time": "07:35",
+        "place": "usj",
+        "category": "spot",
+        "label": "抵達 USJ、排隊入園"
+      },
+      {
+        "time": "開園後",
+        "place": "usj",
+        "category": "spot",
+        "label": "USJ 全天遊玩"
+      },
+      {
+        "time": "閉園後",
+        "place": "oriental",
+        "category": "hotel",
+        "label": "步行入住飯店"
+      }
+    ],
+    "notes": [
+      "依官方開園時間再微調出發。",
+      "Express Pass 與整理券策略之後可補入。"
+    ]
+  },
+  {
+    "date": "2026-08-03",
+    "day": "Day 4",
+    "title": "大阪城・梅田購物・敘敘苑",
+    "hotel": "canopy",
+    "items": [
+      {
+        "time": "09:00",
+        "place": "oriental",
+        "category": "hotel",
+        "label": "退房"
+      },
+      {
+        "time": "10:00",
+        "place": "canopy",
+        "category": "hotel",
+        "label": "寄放行李"
+      },
+      {
+        "time": "10:45",
+        "place": "osaka_castle",
+        "category": "spot",
+        "label": "大阪城"
+      },
+      {
+        "time": "13:30",
+        "place": "grand_green",
+        "category": "spot",
+        "label": "Grand Green Osaka"
+      },
+      {
+        "time": "15:00",
+        "place": "lucua",
+        "category": "shopping",
+        "label": "LUCUA Osaka 購物"
+      },
+      {
+        "time": "16:30",
+        "place": "hankyu",
+        "category": "shopping",
+        "label": "阪急百貨梅田本店"
+      },
+      {
+        "time": "18:30",
+        "place": "jojoen",
+        "category": "food",
+        "label": "敘敘苑晚餐"
+      },
+      {
+        "time": "20:30",
+        "place": "canopy",
+        "category": "hotel",
+        "label": "入住飯店"
+      }
+    ],
+    "notes": [
+      "梅田行程集中，步行為主。",
+      "敘敘苑位於 LUCUA 10F，可視購物節奏調整前後順序。"
+    ]
+  },
+  {
+    "date": "2026-08-04",
+    "day": "Day 5",
+    "title": "早餐・前往機場",
+    "hotel": "canopy",
+    "items": [
+      {
+        "time": "08:00",
+        "place": "canopy",
+        "category": "food",
+        "label": "早餐"
+      },
+      {
+        "time": "09:00",
+        "place": "canopy",
+        "category": "hotel",
+        "label": "退房"
+      },
+      {
+        "time": "09:20",
+        "place": "kix",
+        "category": "transport",
+        "label": "前往關西機場"
+      },
+      {
+        "time": "10:50",
+        "place": "kix",
+        "category": "transport",
+        "label": "抵達機場、辦理登機"
+      },
+      {
+        "time": "13:10",
+        "place": "kix",
+        "category": "transport",
+        "label": "班機離開日本"
+      }
+    ],
+    "notes": [
+      "國際線建議至少提前約 2 小時抵達；實際依航空公司通知為準。"
+    ]
+  }
+]

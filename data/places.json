@@ -1,0 +1,105 @@
+{
+  "kix": {
+    "name": "關西國際機場 KIX",
+    "type": "transport",
+    "query": "Kansai International Airport"
+  },
+  "view_hotel": {
+    "name": "Osaka View Hotel Honmachi",
+    "type": "hotel",
+    "query": "Osaka View Hotel Honmachi",
+    "official": "https://www.viewhotels.jp/osaka/"
+  },
+  "shinsaibashi": {
+    "name": "心齋橋筋商店街",
+    "type": "shopping",
+    "query": "Shinsaibashi-Suji Shopping Street"
+  },
+  "dotonbori": {
+    "name": "道頓堀",
+    "type": "spot",
+    "query": "Dotonbori Osaka"
+  },
+  "hon_sekiguchi": {
+    "name": "本せきぐち Hon Sekiguchi",
+    "type": "restaurant",
+    "query": "本せきぐち 大阪 千日前",
+    "official": "https://honsekiguti.gorp.jp/",
+    "note": "關西風壽喜燒；建議提前預約。"
+  },
+  "nara_station": {
+    "name": "近鐵奈良站",
+    "type": "transport",
+    "query": "Kintetsu Nara Station"
+  },
+  "nara_park": {
+    "name": "奈良公園",
+    "type": "spot",
+    "query": "Nara Park"
+  },
+  "nara_lunch": {
+    "name": "奈良午餐（待決定）",
+    "type": "restaurant",
+    "query": "奈良公園 ランチ",
+    "note": "尚未決定；可選釜飯、茶粥、柿葉壽司或奈良和牛。"
+  },
+  "yasaka": {
+    "name": "難波八阪神社",
+    "type": "spot",
+    "query": "Namba Yasaka Shrine"
+  },
+  "kanigen": {
+    "name": "大阪かに源 道頓堀店",
+    "type": "restaurant",
+    "query": "大阪かに源 道頓堀店",
+    "note": "長腳蟹／帝王蟹料理；建議預約並確認套餐內容。"
+  },
+  "usj": {
+    "name": "日本環球影城 USJ",
+    "type": "spot",
+    "query": "Universal Studios Japan",
+    "official": "https://www.usj.co.jp/web/ja/jp"
+  },
+  "oriental": {
+    "name": "Oriental Hotel Universal City",
+    "type": "hotel",
+    "query": "Oriental Hotel Universal City",
+    "official": "https://universalcity.oriental-hotels.com/"
+  },
+  "canopy": {
+    "name": "Canopy by Hilton Osaka Umeda",
+    "type": "hotel",
+    "query": "Canopy by Hilton Osaka Umeda",
+    "official": "https://www.hilton.com/en/hotels/osapypy-canopy-osaka-umeda/"
+  },
+  "osaka_castle": {
+    "name": "大阪城",
+    "type": "spot",
+    "query": "Osaka Castle"
+  },
+  "grand_green": {
+    "name": "Grand Green Osaka",
+    "type": "spot",
+    "query": "Grand Green Osaka",
+    "official": "https://umekita.com/"
+  },
+  "lucua": {
+    "name": "LUCUA Osaka",
+    "type": "shopping",
+    "query": "LUCUA Osaka",
+    "official": "https://www.lucua.jp/"
+  },
+  "hankyu": {
+    "name": "阪急百貨店 梅田本店",
+    "type": "shopping",
+    "query": "Hankyu Umeda Main Store",
+    "official": "https://www.hankyu-dept.co.jp/honten/"
+  },
+  "jojoen": {
+    "name": "敘敘苑 LUCUA大阪店",
+    "type": "restaurant",
+    "query": "叙々苑 ルクア大阪店",
+    "official": "https://www.jojoen.co.jp/shop/jojoen/lucua/",
+    "note": "LUCUA 10F；建議預約。"
+  }
+}

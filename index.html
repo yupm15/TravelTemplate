@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#19352f">
+  <title>Osaka 2026 Travel Plan</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="hero">
+    <div>
+      <p class="eyebrow">OSAKA · 2026</p>
+      <h1>大阪 5 日旅行</h1>
+      <p>2026/07/31–08/04 · yupm15 / TravelTemplate</p>
+    </div>
+    <div class="countdown" id="countdown">旅程倒數計算中</div>
+  </header>
+
+  <nav class="mode-tabs" aria-label="檢視模式">
+    <button class="active" data-mode="all">完整行程</button>
+    <button data-mode="food">美食</button>
+    <button data-mode="hotel">住宿</button>
+    <button data-mode="shopping">購物</button>
+  </nav>
+
+  <main>
+    <section class="summary" id="summary"></section>
+    <section class="day-tabs" id="dayTabs" aria-label="日期"></section>
+    <section id="dayView" aria-live="polite"></section>
+  </main>
+
+  <footer>
+    <p>Google Maps 路線會依開啟當下的交通狀況重新計算。營業時間與訂位資訊請於出發前再次確認。</p>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
