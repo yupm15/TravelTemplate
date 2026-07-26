@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<base target="_blank">
+<title>Osaka 2026｜Notion Embed V3</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+<style>
+:root{
+  --bg:#f7f7f5;--paper:#ffffff;--ink:#37352f;--muted:#787774;
+  --line:#e8e7e4;--soft:#f1f1ef;--accent:#d45d3c;--green:#448361;
+  --shadow:0 1px 2px rgba(15,15,15,.04);
+}
+*{box-sizing:border-box} html,body{margin:0;background:var(--bg);color:var(--ink);
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC",sans-serif}
+button,a{font:inherit}.topbar{display:none}.embed-header{min-height:48px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 16px;gap:12px}.embed-header span{color:var(--muted);font-weight:400}
+.brand{font-weight:700}.top-meta{font-size:.86rem;color:var(--muted)}
+.app{max-width:1440px;margin:auto;display:grid;grid-template-columns:minmax(500px,.95fr) minmax(520px,1.05fr);min-height:720px}
+.notes-pane{padding:34px 42px 70px;border-right:1px solid var(--line);background:var(--paper)}
+.map-pane{padding:18px;position:sticky;top:12px;height:760px}
+.cover{height:112px;border-radius:8px;background:linear-gradient(135deg,#e8ddd0,#d6e1dc);margin-bottom:28px;
+display:flex;align-items:flex-end;padding:18px;font-size:2rem}
+.eyebrow{font-size:.78rem;color:var(--muted);letter-spacing:.08em}.page-title{font-size:2.5rem;line-height:1.15;margin:7px 0 10px}
+.subtitle{color:var(--muted);margin:0 0 22px}.properties{display:grid;grid-template-columns:110px 1fr;gap:8px 14px;
+font-size:.92rem;padding:14px 0 20px;border-bottom:1px solid var(--line)}
+.prop-name{color:var(--muted)}.day-tabs{display:flex;gap:7px;overflow:auto;padding:22px 0 16px}
+.day-tabs button,.view-buttons button{border:1px solid var(--line);background:#fff;border-radius:6px;padding:7px 10px;cursor:pointer}
+.day-tabs button.active,.view-buttons button.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+.day-header{margin:4px 0 18px}.day-header h2{margin:0 0 5px;font-size:1.45rem}.day-header p{margin:0;color:var(--muted)}
+.timeline{position:relative}
+.stop{display:grid;grid-template-columns:58px 22px minmax(0,1fr);column-gap:10px;position:relative;margin-bottom:8px;align-items:stretch}
+.time{font-size:.78rem;color:var(--muted);padding-top:17px;text-align:right;white-space:nowrap;position:relative;z-index:3;background:var(--paper)}
+.rail{position:relative;min-height:62px}
+.rail::before{content:"";position:absolute;left:50%;top:0;bottom:-8px;width:1px;background:var(--line);transform:translateX(-50%)}
+.stop:first-child .rail::before{top:22px}
+.stop:last-child .rail::before{bottom:calc(100% - 22px)}
+.dot{width:11px;height:11px;border-radius:50%;background:#fff;border:2px solid #aaa;position:absolute;left:50%;top:19px;transform:translateX(-50%);z-index:2;box-sizing:border-box}
+.stop.active .dot{background:var(--accent);border-color:var(--accent)}
+.block{border-radius:7px;padding:13px 14px;cursor:pointer;transition:background .15s,border-color .15s;border:1px solid transparent;min-width:0}
+.block:hover{background:transparent}.block.active{background:#fff8f5;border-color:#f0c8bc}
+.block h3{font-size:1rem;margin:0 0 4px}.block p{margin:0;color:var(--muted);font-size:.9rem}
+.route-chip{display:inline-flex;margin-top:8px;border-radius:4px;background:var(--soft);padding:4px 7px;font-size:.78rem;color:var(--ink)}
+.callout{margin-top:22px;background:var(--soft);border-radius:7px;padding:14px 16px;font-size:.9rem}.callout ul{margin:8px 0 0;padding-left:20px}
+.map-card{height:100%;background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
+.map-toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;border-bottom:1px solid var(--line)}
+.map-toolbar strong{font-size:.95rem}.view-buttons{display:flex;gap:6px;align-items:center}.view-state{font-size:.78rem;color:var(--muted)}
+#map{flex:1;min-height:430px;background:#ecebe8}.map-status{display:none;padding:12px;background:#fff4ce;border-top:1px solid #e8d99b;font-size:.86rem}
+.segment{padding:14px;border-top:1px solid var(--line)}.segment strong{display:block;margin-bottom:4px}.segment span{color:var(--muted);font-size:.9rem}
+.actions{display:flex;gap:8px;flex-wrap:wrap;padding:0 14px 14px}.actions a{border:1px solid var(--line);border-radius:6px;padding:8px 10px;color:var(--ink);text-decoration:none;font-size:.88rem}
+.actions a.primary{background:var(--ink);color:#fff;border-color:var(--ink)}
+.marker{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;border:3px solid #fff;box-shadow:0 2px 7px #0004}
+.marker.start{background:var(--green)}.marker.end{background:var(--accent)}.marker.all{background:#56534e}
+.maplibregl-popup-content{border-radius:8px;padding:10px 12px}.maplibregl-ctrl-attrib{font-size:10px}
+@media(max-width:1000px){
+ .app{grid-template-columns:1fr}.notes-pane{border-right:0;padding:24px 20px 36px}.map-pane{position:static;height:620px;padding:0 20px 24px}
+}
+@media(max-width:600px){
+ .page-title{font-size:2rem}.cover{height:90px}.properties{grid-template-columns:90px 1fr}.map-pane{height:560px;padding:0 12px 18px}
+ .notes-pane{padding:18px 14px 30px}.map-toolbar{align-items:flex-start;flex-direction:column}
+}
+</style>
+</head>
+<body>
+<header class="embed-header"><div><strong>Osaka 2026</strong><span>｜大阪五日旅行</span></div><div class="top-meta" id="countdown"></div></header>
+<main class="app">
+<section class="notes-pane">
+  <div class="cover">🗾</div>
+  <div class="eyebrow">TRAVEL NOTE</div>
+  <h1 class="page-title">大阪五日旅行</h1>
+  <p class="subtitle">Notion 式行程筆記＋點擊連動地圖</p>
+  <div class="properties">
+    <div class="prop-name">日期</div><div>2026/7/31–8/4</div>
+    <div class="prop-name">住宿</div><div>本町・環球城・梅田</div>
+    <div class="prop-name">交通</div><div>KIX、大阪市區、奈良</div>
+  </div>
+  <div class="day-tabs" id="dayTabs"></div>
+  <div class="day-header"><h2 id="dayTitle"></h2><p id="dayTheme"></p></div>
+  <div class="timeline" id="timeline"></div>
+  <div class="callout" id="notes"></div>
+</section>
+<aside class="map-pane">
+  <div class="map-card">
+    <div class="map-toolbar">
+      <strong>Map</strong>
+      <div class="view-buttons">
+        <button type="button" id="showSegment" class="active">目前路段</button>
+        <button type="button" id="showDay">全日</button>
+        <span class="view-state" id="viewState"></span>
+      </div>
+    </div>
+    <div id="map"></div>
+    <div class="map-status" id="mapStatus">地圖服務暫時無法完整載入。請使用下方 Google Maps 按鈕；按鈕會在新分頁開啟。</div>
+    <div class="segment" id="segmentInfo"></div>
+    <div class="actions">
+      <a class="primary" id="openRoute" target="_blank" rel="noopener">Google Maps 導航</a>
+      <a id="openPlace" target="_blank" rel="noopener">查看目的地</a>
+    </div>
+  </div>
+</aside>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script>
+const days=[{"date": "7/31", "weekday": "五", "title": "抵達大阪・心齋橋・道頓堀", "theme": "抵達日｜南區散步與關西風壽喜燒", "items": [["12:10", "✈️", "關西國際機場 KIX", "抵達日本、辦理入境與領取行李", "Kansai International Airport", "transport", "KIX"], ["14:30", "🏨", "Osaka View Hotel Honmachi", "寄放行李／入住", "Osaka View Hotel Honmachi", "hotel", "HONMACHI"], ["15:30", "🛍️", "心齋橋筋商店街", "散步與購物", "Shinsaibashi-Suji Shopping Street", "shopping", "SHINSAIBASHI"], ["17:00", "📍", "道頓堀", "河畔散步、拍照", "Dotonbori Osaka", "spot", "DOTONBORI"], ["18:30", "🍲", "本せきぐち Hon Sekiguchi", "關西風壽喜燒晚餐；建議提前預約", "本せきぐち 大阪 千日前", "food", "SEKIGUCHI"], ["20:30", "🏨", "Osaka View Hotel Honmachi", "返回飯店休息", "Osaka View Hotel Honmachi", "hotel", "HONMACHI"]], "notes": ["抵達時間可能受入境與行李影響，下午行程保留彈性。", "本せきぐち位於千日前，晚餐後可再散步道頓堀。"]}, {"date": "8/1", "weekday": "六", "title": "奈良一日遊・難波晚餐", "theme": "奈良公園｜午餐待決定｜長腳蟹料理", "items": [["10:00", "🏨", "Osaka View Hotel Honmachi", "飯店出發", "Osaka View Hotel Honmachi", "hotel", "HONMACHI"], ["11:10", "🚆", "近鐵奈良站", "抵達奈良", "Kintetsu Nara Station", "transport", "KINTETSU_NARA"], ["11:30", "🦌", "奈良公園", "散步、餵鹿", "Nara Park", "spot", "NARA_PARK"], ["13:00", "🍱", "奈良午餐（待決定）", "可選釜飯、茶粥、柿葉壽司或奈良和牛", "奈良公園 ランチ", "food", "NARA_LUNCH"], ["16:45", "⛩️", "難波八阪神社", "返回大阪後參拜", "Namba Yasaka Shrine", "spot", "YASAKA"], ["18:30", "🦀", "大阪かに源 道頓堀店", "長腳蟹料理晚餐；建議預約", "大阪かに源 道頓堀店", "food", "KANIGEN"], ["20:30", "🏨", "Osaka View Hotel Honmachi", "返回飯店", "Osaka View Hotel Honmachi", "hotel", "HONMACHI"]], "notes": ["奈良午餐尚未決定，保留為可替換項目。", "奈良回大阪後若太累，可視情況取消八阪神社。"]}, {"date": "8/2", "weekday": "日", "title": "日本環球影城 USJ", "theme": "全天樂園日｜提早出發", "items": [["06:45", "🏨", "Osaka View Hotel Honmachi", "退房並提早出發", "Osaka View Hotel Honmachi", "hotel", "HONMACHI"], ["07:35", "🎢", "日本環球影城 USJ", "排隊入園、全天遊玩", "Universal Studios Japan", "spot", "USJ"], ["閉園後", "🏨", "Oriental Hotel Universal City", "步行入住飯店", "Oriental Hotel Universal City", "hotel", "ORIENTAL"]], "notes": ["實際出發時間需依 2026/8/2 官方開園時間再調整。", "Express Pass、整理券與園區餐廳之後可補入。"]}, {"date": "8/3", "weekday": "一", "title": "大阪城・梅田購物・敘敘苑", "theme": "行李轉移｜大阪城｜梅田集中逛街", "items": [["09:00", "🏨", "Oriental Hotel Universal City", "退房", "Oriental Hotel Universal City", "hotel", "ORIENTAL"], ["10:00", "🧳", "Canopy by Hilton Osaka Umeda", "寄放行李", "Canopy by Hilton Osaka Umeda", "hotel", "CANOPY"], ["10:45", "🏯", "大阪城", "城郭與公園散策", "Osaka Castle", "spot", "OSAKA_CASTLE"], ["13:30", "🌿", "Grand Green Osaka", "午餐、散步與新商場", "Grand Green Osaka", "spot", "GRAND_GREEN"], ["15:00", "🛍️", "LUCUA Osaka", "購物", "LUCUA Osaka", "shopping", "LUCUA"], ["16:30", "🛍️", "阪急百貨店 梅田本店", "百貨採買", "Hankyu Umeda Main Store", "shopping", "HANKYU"], ["18:30", "🥩", "敘敘苑 LUCUA大阪店", "最後一晚燒肉晚餐；建議預約", "叙々苑 ルクア大阪店", "food", "JOJOEN"], ["20:30", "🏨", "Canopy by Hilton Osaka Umeda", "入住飯店", "Canopy by Hilton Osaka Umeda", "hotel", "CANOPY"]], "notes": ["梅田區域以步行為主，商場順序可依當日購物狀況調整。", "敘敘苑位於 LUCUA 10F。"]}, {"date": "8/4", "weekday": "二", "title": "早餐・前往機場", "theme": "返程日｜提早前往 KIX", "items": [["08:00", "☕", "Canopy by Hilton Osaka Umeda", "早餐", "Canopy by Hilton Osaka Umeda", "food", "CANOPY"], ["09:00", "🏨", "Canopy by Hilton Osaka Umeda", "退房", "Canopy by Hilton Osaka Umeda", "hotel", "CANOPY"], ["09:20", "🚆", "前往關西國際機場", "搭車前往 KIX", "Kansai International Airport", "transport", "KIX"], ["10:50", "✈️", "關西國際機場 KIX", "辦理登機、安檢與出境", "Kansai International Airport", "transport", "KIX"], ["13:10", "🛫", "班機離開日本", "旅程結束", "Kansai International Airport", "transport", "KIX"]], "notes": ["國際線建議至少提前約 2 小時抵達；請依航空公司通知為準。"]}];
+const P={"KIX": [135.244, 34.4347], "HONMACHI": [135.4994, 34.6836], "SHINSAIBASHI": [135.5013, 34.6733], "DOTONBORI": [135.5019, 34.6687], "SEKIGUCHI": [135.5067, 34.6668], "KINTETSU_NARA": [135.8279, 34.6844], "NARA_PARK": [135.843, 34.6851], "NARA_LUNCH": [135.8384, 34.6838], "YASAKA": [135.4962, 34.6592], "KANIGEN": [135.5039, 34.6692], "USJ": [135.4323, 34.6654], "ORIENTAL": [135.4372, 34.6678], "CANOPY": [135.4906, 34.7056], "OSAKA_CASTLE": [135.5262, 34.6873], "GRAND_GREEN": [135.493, 34.7053], "LUCUA": [135.4951, 34.7025], "HANKYU": [135.4987, 34.7037], "JOJOEN": [135.4952, 34.7026]};
+let activeDay=0,activeStep=0,mode='segment',map=null,markers=[];
+const $=id=>document.getElementById(id);
+const ll=key=>{const p=P[key];return [p[0],p[1]]};
+const gSearch=q=>'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(q);
+const gRoute=(a,b,mode='transit')=>'https://www.google.com/maps/dir/?api=1&origin='+encodeURIComponent(a)+'&destination='+encodeURIComponent(b)+'&travelmode='+mode;
+function km(a,b){
+ const R=6371,dLat=(b[1]-a[1])*Math.PI/180,dLon=(b[0]-a[0])*Math.PI/180;
+ const x=Math.sin(dLat/2)**2+Math.cos(a[1]*Math.PI/180)*Math.cos(b[1]*Math.PI/180)*Math.sin(dLon/2)**2;
+ return 2*R*Math.atan2(Math.sqrt(x),Math.sqrt(1-x));
+}
+function previousDistinct(items,index){
+ const current=ll(items[index][6]);
+ for(let i=index-1;i>=0;i--){
+   const p=ll(items[i][6]);
+   if(km(p,current)>.03)return {index:i,item:items[i],coord:p};
+ }
+ return null;
+}
+function markerEl(label,type){
+ const el=document.createElement('div');el.className='marker '+type;el.textContent=label;return el;
+}
+function initMap(){
+ if(!window.maplibregl){$('mapStatus').style.display='block';return}
+ try{
+   map=new maplibregl.Map({
+     container:'map',
+     style:'https://tiles.openfreemap.org/styles/liberty',
+     center:[135.501,34.681],zoom:12,attributionControl:true
+   });
+   map.addControl(new maplibregl.NavigationControl({showCompass:false}),'top-right');
+   map.on('load',()=>{renderMap()});
+   map.on('error',e=>{if(!map.loaded())$('mapStatus').style.display='block'});
+ }catch(e){$('mapStatus').style.display='block'}
+}
+function clearMap(){
+ markers.forEach(m=>m.remove());markers=[];
+ if(!map||!map.getStyle())return;
+ ['route-current','route-day'].forEach(id=>{if(map.getLayer(id))map.removeLayer(id);if(map.getSource(id))map.removeSource(id)});
+}
+function addLine(id,coords,color,width,dash){
+ map.addSource(id,{type:'geojson',data:{type:'Feature',geometry:{type:'LineString',coordinates:coords}}});
+ map.addLayer({id,type:'line',source:id,layout:{'line-cap':'round','line-join':'round'},paint:{
+   'line-color':color,'line-width':width,'line-opacity':.9,'line-dasharray':dash
+ }});
+}
+function fit(coords,maxZoom){
+ const bounds=coords.reduce((b,c)=>b.extend(c),new maplibregl.LngLatBounds(coords[0],coords[0]));
+ map.fitBounds(bounds,{padding:70,maxZoom,duration:550});
+}
+function renderMap(){
+ if(!map||!map.loaded())return;
+ clearMap();
+ const items=days[activeDay].items;
+ if(mode==='day'){
+   const coords=items.map(it=>ll(it[6]));
+   const unique=coords.filter((c,i)=>i===0||km(coords[i-1],c)>.03);
+   if(unique.length>1)addLine('route-day',unique,'#b66b55',4,[2,2]);
+   items.forEach((it,i)=>{
+     const m=new maplibregl.Marker({element:markerEl(i+1,'all')}).setLngLat(coords[i])
+       .setPopup(new maplibregl.Popup({offset:18}).setHTML(`<strong>${it[2]}</strong><br>${it[0]}`)).addTo(map);
+     markers.push(m);
+   });
+   fit(coords,14);$('viewState').textContent='全日';
+   return;
+ }
+ const current=ll(items[activeStep][6]);
+ const prev=previousDistinct(items,activeStep);
+ if(prev){
+   addLine('route-current',[prev.coord,current],'#d45d3c',6,[2,1.5]);
+   markers.push(new maplibregl.Marker({element:markerEl('起','start')}).setLngLat(prev.coord)
+     .setPopup(new maplibregl.Popup({offset:18}).setHTML(`<strong>起點</strong><br>${prev.item[2]}`)).addTo(map));
+   markers.push(new maplibregl.Marker({element:markerEl('終','end')}).setLngLat(current)
+     .setPopup(new maplibregl.Popup({offset:18}).setHTML(`<strong>目的地</strong><br>${items[activeStep][2]}`)).addTo(map));
+   const d=km(prev.coord,current);fit([prev.coord,current],d<1?17:d<5?15:12);
+   $('viewState').textContent=d<1?'街區放大':d<8?'市區路段':'跨城市路段';
+ }else{
+   markers.push(new maplibregl.Marker({element:markerEl('1','end')}).setLngLat(current).addTo(map));
+   map.flyTo({center:current,zoom:16,duration:500});$('viewState').textContent='第一站';
+ }
+}
+function updateInfo(){
+ const items=days[activeDay].items,it=items[activeStep],prev=previousDistinct(items,activeStep);
+ $('openPlace').href=gSearch(it[4]);
+ if(prev){
+   const walk=km(prev.coord,ll(it[6]))<1.6&&prev.item[5]!=='transport'&&it[5]!=='transport';
+   $('segmentInfo').innerHTML=`<strong>${prev.item[2]} → ${it[2]}</strong><span>起點：${prev.item[2]}／目的地：${it[2]}</span>`;
+   $('openRoute').href=gRoute(prev.item[4],it[4],walk?'walking':'transit');
+   $('openRoute').textContent=`導航到 ${it[2]}`;
+ }else{
+   $('segmentInfo').innerHTML=`<strong>${it[2]}</strong><span>本日第一站，沒有前一個不同地點。</span>`;
+   $('openRoute').href=gSearch(it[4]);$('openRoute').textContent='查看第一站';
+ }
+}
+function selectStep(i){
+ activeStep=i;mode='segment';
+ $('showSegment').classList.add('active');$('showDay').classList.remove('active');
+ document.querySelectorAll('.stop').forEach((el,n)=>el.classList.toggle('active',n===i));
+ updateInfo();renderMap();
+}
+function renderTimeline(){
+ const items=days[activeDay].items;
+ $('timeline').innerHTML=items.map((it,i)=>{
+   const prev=previousDistinct(items,i);
+   const route=prev?`${prev.item[2]} → ${it[2]}`:'本日第一站';
+   return `<article class="stop" data-step="${i}"><div class="time">${it[0]}</div><div class="rail"><span class="dot"></span></div><div class="block">
+   <h3>${it[1]} ${it[2]}</h3><p>${it[3]}</p><span class="route-chip">${route}</span></div></article>`;
+ }).join('');
+ document.querySelectorAll('.stop').forEach(el=>el.addEventListener('click',()=>selectStep(+el.dataset.step)));
+}
+function renderDay(){
+ const d=days[activeDay];activeStep=0;mode='segment';
+ document.querySelectorAll('[data-day]').forEach((b,i)=>b.classList.toggle('active',i===activeDay));
+ $('dayTitle').textContent=`${d.date}（${d.weekday}） ${d.title}`;$('dayTheme').textContent=d.theme;
+ $('notes').innerHTML='<strong>今日提醒</strong><ul>'+d.notes.map(x=>`<li>${x}</li>`).join('')+'</ul>';
+ renderTimeline();document.querySelector('.stop').classList.add('active');updateInfo();renderMap();
+}
+$('dayTabs').innerHTML=days.map((d,i)=>`<button type="button" data-day="${i}">${d.date}</button>`).join('');
+document.querySelectorAll('[data-day]').forEach(b=>b.addEventListener('click',()=>{activeDay=+b.dataset.day;renderDay()}));
+$('showSegment').addEventListener('click',()=>{mode='segment';$('showSegment').classList.add('active');$('showDay').classList.remove('active');renderMap()});
+$('showDay').addEventListener('click',()=>{mode='day';$('showDay').classList.add('active');$('showSegment').classList.remove('active');renderMap()});
+const target=new Date('2026-07-31T12:10:00+09:00'),n=Math.ceil((target-new Date())/86400000);
+$('countdown').textContent=n>0?`距離出發 ${n} 天`:n===0?'今天出發':'旅程日期已到';
+renderDay();initMap();
+</script>
+</body>
+</html>
